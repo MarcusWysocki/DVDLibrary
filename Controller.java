@@ -11,10 +11,17 @@ public class Controller {
 
     public static void main(String args[]) {
 
-        String FILE = "src/DVDLibrary/dvd.csv";
+        String FILE = "src/DVDLibrary/dvds.txt";
+
+        /**View view = new View();
+
+        while(view.using) {
+            view.menu();
+        }*/
 
         try {
             dvds = load(FILE);
+            //load(FILE);
         } catch (Exception e) {
             System.out.println("No file found");
         }
@@ -25,9 +32,16 @@ public class Controller {
             removeDvd(search(remDvd));
         }
         list();
+
     }
 
     public static void display(DVD dvd) {
+        System.out.println("Title: " + dvd.getTitle());
+        System.out.println("Release Date: " + dvd.getDate());
+        System.out.println("MPAA: " + dvd.getMpaa());
+        System.out.println("Director: " + dvd.getDirector());
+        System.out.println("Studio: " + dvd.getStudio());
+        System.out.println("User Comment: " + dvd.getUserRating());
     }
 
     public static void list() {
@@ -63,12 +77,13 @@ public class Controller {
     }
 
     public static ArrayList<DVD> load(String file) throws FileNotFoundException {
+        System.out.println("Loading from " + file);
         File txt = new File(file);
         //Scanner loader = new Scanner(new FileReader(file));
 
         Scanner loader = new Scanner(txt);
 
-        ArrayList<DVD> dvds = new ArrayList<>();
+        ArrayList<DVD> dvdss = new ArrayList<>();
 
         while (loader.hasNextLine()) {
             String line = loader.nextLine();
@@ -83,18 +98,21 @@ public class Controller {
             try {
                 String userRating = lineScanner.next();
                 DVD dvd = new DVD(title, date, mpaa, director, studio, userRating);
-                dvds.add(dvd);
+                dvdss.add(dvd);
             } catch(Exception e) {
                 DVD dvd = new DVD(title, date, mpaa, director, studio);
-                dvds.add(dvd);
+                dvdss.add(dvd);
             }
         }
 
-        return dvds;
+        System.out.println("DVDs loaded: ");
+        list();
+        return dvdss;
 
     }
 
     public static void save() {
+        System.out.println("Saving...");
         try {
             FileWriter writer = new FileWriter("src/DVDLibrary/dvd.csv");
 
