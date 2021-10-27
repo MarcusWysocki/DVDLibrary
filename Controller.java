@@ -12,19 +12,26 @@ public class Controller {
     public static void main(String args[]) {
 
         String FILE = "src/DVDLibrary/dvds.txt";
+        //String FILE = "src/DVDsaves/dvd.csv";
 
-        /**View view = new View();
+        try {
+            loadDvds(FILE);
+        } catch (Exception e) {
+            System.out.println("File not loaded");
+        }
+
+        View view = new View();
 
         while(view.using) {
             view.menu();
-        }*/
+        }
 
-        try {
-            dvds = load(FILE);
-            //load(FILE);
+        /**try {
+            //dvds = load(FILE);
+            load(FILE);
         } catch (Exception e) {
             System.out.println("No file found");
-        }
+        }*/
 
         String remDvd = "The Terminator";
 
@@ -32,6 +39,7 @@ public class Controller {
             removeDvd(search(remDvd));
         }
         list();
+        save();
 
     }
 
@@ -72,11 +80,12 @@ public class Controller {
     }
 
     public static void removeDvd(DVD dvd) {
+        System.out.println("Deleting " + dvd.getTitle());
         dvds.remove(dvd);
-        save();
+        //save();
     }
 
-    public static ArrayList<DVD> load(String file) throws FileNotFoundException {
+    public static void loadDvds(String file) throws FileNotFoundException {
         System.out.println("Loading from " + file);
         File txt = new File(file);
         //Scanner loader = new Scanner(new FileReader(file));
@@ -105,16 +114,16 @@ public class Controller {
             }
         }
 
-        System.out.println("DVDs loaded: ");
-        list();
-        return dvdss;
+        //System.out.println("DVDs loaded: ");
+        //list();
+        dvds = dvdss;
 
     }
 
     public static void save() {
         System.out.println("Saving...");
         try {
-            FileWriter writer = new FileWriter("src/DVDLibrary/dvd.csv");
+            FileWriter writer = new FileWriter("src/DVDsaves/dvd.csv");
 
             for (DVD dvd : dvds) {
                 String inputDvd = dvd.getTitle() + "," + Integer.toString(dvd.getDate()) + "," +
