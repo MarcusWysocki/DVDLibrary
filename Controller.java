@@ -2,20 +2,19 @@ package DVDLibrary;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Controller {
 
     static ArrayList<DVD> dvds = new ArrayList<>();
 
+    static String FILE = "src/DVDLibrary/dvds.txt";
+    //static String FILE = "src/DVDsaves/dvd.csv";
+
     public static void main(String args[]) {
 
-        String FILE = "src/DVDLibrary/dvds.txt";
-        //String FILE = "src/DVDsaves/dvd.csv";
-
         try {
-            loadDvds(FILE);
+            loadDvds();
         } catch (Exception e) {
             System.out.println("File not loaded");
         }
@@ -49,7 +48,7 @@ public class Controller {
 
     public static DVD search(String title) {
         for (DVD dvd : dvds) {
-            if (title.toLowerCase().equals(dvd.getTitle().toLowerCase())) {
+            if (title.equalsIgnoreCase(dvd.getTitle())) {
                 return dvd;
             }
         }
@@ -101,9 +100,9 @@ public class Controller {
         save();
     }
 
-    public static void loadDvds(String file) throws FileNotFoundException {
-        System.out.println("Loading from " + file);
-        File txt = new File(file);
+    public static void loadDvds() throws FileNotFoundException {
+        System.out.println("Loading from " + FILE);
+        File txt = new File(FILE);
         //Scanner loader = new Scanner(new FileReader(file));
 
         Scanner loader = new Scanner(txt);
@@ -130,8 +129,6 @@ public class Controller {
             }
         }
 
-        //System.out.println("DVDs loaded: ");
-        //list();
         dvds = dvdss;
 
     }
@@ -139,7 +136,8 @@ public class Controller {
     public static void save() {
         System.out.println("Saving...");
         try {
-            FileWriter writer = new FileWriter("src/DVDsaves/dvd.csv");
+            //FileWriter writer = new FileWriter("src/DVDsaves/dvd.csv");
+            FileWriter writer = new FileWriter(FILE);
 
             for (DVD dvd : dvds) {
                 String inputDvd = dvd.getTitle() + "," + Integer.toString(dvd.getDate()) + "," +
@@ -157,12 +155,16 @@ public class Controller {
     public static boolean dupCheck(String title) {
 
         for (DVD dvd : dvds) {
-            if (dvd.getTitle().toLowerCase().equals(title.toLowerCase())) {
+            if (dvd.getTitle().equalsIgnoreCase(title)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public static void setFile(String path) {
+        FILE = path;
     }
 
     public static void exit() {

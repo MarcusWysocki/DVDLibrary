@@ -15,13 +15,9 @@ public class View {
         System.out.println("=============================================");
         System.out.println("Please choose an action by entering a number:");
         System.out.println("1. Add Film  ||  2. List Film");
-        //System.out.println("2. Remove Film");
-        //System.out.println("  ||");
-        //System.out.println("4. List Film");
         System.out.println("3. Save file  ||  4. Load file");
-        //System.out.println("6. Load file");
-        System.out.println("5. Search for Film  ||  6. Exit application");
-        //System.out.println("8. Exit application");
+        System.out.println("5. Search for Film  ||  6. Change Save location");
+        System.out.println("7. Exit application");
         System.out.println("=============================================");
 
         Scanner in = new Scanner(System.in);
@@ -45,6 +41,8 @@ public class View {
                 searchFilm();
                 break;
             case 6:
+                saveLocation();
+            case 7:
                 exiting();
                 break;
             default:
@@ -157,7 +155,7 @@ public class View {
 
     public static void loadFile() {
         try {
-            loadDvds(FILE_PATH);
+            loadDvds();
         } catch(Exception e) {
             System.out.println("File not found");
         }
@@ -167,6 +165,16 @@ public class View {
     public static void saveFile() {
         save();
         menu();
+    }
+
+    public static void saveLocation() {
+        System.out.println("Enter new file location");
+        Scanner in = new Scanner(System.in);
+        String path = in.nextLine();
+
+        setFile(path);
+        menu();
+
     }
 
     public static void exiting() {
