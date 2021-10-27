@@ -14,7 +14,7 @@ public class View {
 
         System.out.println("=============================================");
         System.out.println("Please choose an action by entering a number:");
-        System.out.println("1. Add Film  ||  2. List Film");
+        System.out.println("1. Add Film  ||  2. List Films");
         System.out.println("3. Save file  ||  4. Load file");
         System.out.println("5. Search for Film  ||  6. Change Save location");
         System.out.println("7. Exit application");
