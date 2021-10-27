@@ -26,18 +26,6 @@ public class Controller {
             view.menu();
         }
 
-        /**try {
-            //dvds = load(FILE);
-            load(FILE);
-        } catch (Exception e) {
-            System.out.println("No file found");
-        }*/
-
-        String remDvd = "The Terminator";
-
-        if (search(remDvd) != null) {
-            removeDvd(search(remDvd));
-        }
         list();
         save();
 
@@ -83,6 +71,34 @@ public class Controller {
         System.out.println("Deleting " + dvd.getTitle());
         dvds.remove(dvd);
         //save();
+    }
+
+    public static void editDVD(DVD dvd, String title, String date, String mpaa, String director, String studio, String userRating) {
+
+        if (!title.equals("")) {
+            dvd.setTitle(title);
+        }
+
+        if (!date.equals("")) {
+            dvd.setDate(Integer.parseInt(date));
+        }
+
+        if (!mpaa.equals("")) {
+            dvd.setMpaa(Integer.parseInt(mpaa));
+        }
+
+        if (!director.equals("")) {
+            dvd.setDirector(director);
+        }
+
+        if (!studio.equals("")) {
+            dvd.setStudio(studio);
+        }
+
+        if (!userRating.equals("")) {
+            dvd.setUserRating(userRating);
+        }
+        save();
     }
 
     public static void loadDvds(String file) throws FileNotFoundException {
@@ -147,6 +163,10 @@ public class Controller {
         }
 
         return false;
+    }
+
+    public static void exit() {
+        System.exit(0);
     }
 
 }

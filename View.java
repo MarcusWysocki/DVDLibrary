@@ -68,7 +68,7 @@ public class View {
         System.out.println("Please enter your comments:");
         String userRating = in.nextLine();
         addDvd(title, date, mpaa, director, studio, userRating);
-        menu();
+        displayFilm(search(title));
     }
 
     public static void remFilm(DVD dvd) {
@@ -77,10 +77,29 @@ public class View {
         menu();
     }
 
-    public static void editFilm() {
+    public static void editFilm(DVD dvd) {
 
-        System.out.println("Editing film...");
-        menu();
+        Scanner in  = new Scanner(System.in);
+        System.out.println("Input TITLE or leave blank to leave unchanged");
+        String title = in.nextLine();
+
+        System.out.println("Input RELEASE DATE or leave blank to leave unchanged");
+        String date = in.nextLine();
+
+        System.out.println("Input MPAA or leave blank to leave unchanged");
+        String mpaa = in.nextLine();
+
+        System.out.println("Input DIRECTOR or leave blank to leave unchanged");
+        String director = in.nextLine();
+
+        System.out.println("Input STUDIO or leave blank to leave unchanged");
+        String studio = in.nextLine();
+
+        System.out.println("Input COMMENT or leave blank to leave unchanged");
+        String userRating = in.nextLine();
+
+        editDVD(dvd, title, date, mpaa, director, studio, userRating);
+        displayFilm(dvd);
     }
 
     public static void listFilm() {
@@ -96,16 +115,24 @@ public class View {
         Scanner in = new Scanner(System.in);
         String title = in.nextLine();
         System.out.println(title);
-        System.out.println("=============================================");
         DVD dvd = new DVD();
         try {
             dvd = search(title);
-            display(dvd);
+            displayFilm(dvd);
         } catch (Exception e) {
             System.out.println("Could not find film");
             menu();
         }
 
+        System.out.println("=============================================");
+        menu();
+    }
+
+    public static void displayFilm(DVD dvd) {
+        System.out.println("=============================================");
+        display(dvd);
+
+        Scanner in = new Scanner(System.in);
         System.out.println("---------------------------------");
         System.out.println("Would you like to edit or delete this film?");
         System.out.println("1. Edit");
@@ -116,7 +143,7 @@ public class View {
         int choice = in.nextInt();
         switch(choice) {
             case 1:
-                editFilm();
+                editFilm(dvd);
                 break;
             case 2:
                 remFilm(dvd);
@@ -126,9 +153,6 @@ public class View {
 
         }
 
-
-        System.out.println("=============================================");
-        menu();
     }
 
     public static void loadFile() {
@@ -147,7 +171,7 @@ public class View {
 
     public static void exiting() {
         System.out.println("Goodbye!");
-        using = false;
+        exit();
     }
 
 }
