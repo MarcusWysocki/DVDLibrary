@@ -30,6 +30,10 @@ public class Controller {
 
     }
 
+    /**
+     *
+     * @param dvd Takes in a DVD object and displays all of the DVD's informatino
+     */
     public static void display(DVD dvd) {
         System.out.println("Title: " + dvd.getTitle());
         System.out.println("Release Date: " + dvd.getDate());
@@ -39,6 +43,9 @@ public class Controller {
         System.out.println("User Comment: " + dvd.getUserRating());
     }
 
+    /**
+     * Lists all dvds in the library by title.
+     */
     public static void list() {
 
         for (DVD dvd : dvds) {
@@ -46,6 +53,11 @@ public class Controller {
         }
     }
 
+    /**
+     *  Searches the list of films for the dvd object with the same title.
+     * @param title of the dvd
+     * @return the dvd object, or null if there is no film of that title.
+     */
     public static DVD search(String title) {
         for (DVD dvd : dvds) {
             if (title.equalsIgnoreCase(dvd.getTitle())) {
@@ -56,6 +68,15 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Creates a new dvd object with params and adds it to list
+     * @param title of the new dvd
+     * @param date of the new dvd
+     * @param mpaa of the new dvd
+     * @param director of the new dvd
+     * @param studio of the new dvd
+     * @param userRating of the new dvd
+     */
     public static void addDvd(String title, int date, int mpaa, String director, String studio, String userRating) {
         if (!dupCheck(title)) {
             DVD dvd = new DVD(title, date, mpaa, director, studio, userRating);
@@ -66,12 +87,26 @@ public class Controller {
         }
     }
 
+    /**
+     *  Removes dvd object from list of dvds.
+     * @param dvd to remove
+     */
     public static void removeDvd(DVD dvd) {
         System.out.println("Deleting " + dvd.getTitle());
         dvds.remove(dvd);
         //save();
     }
 
+    /**
+     * Edits dvd information with params. If param is blank, the value is not edited.
+     * @param dvd to be edited
+     * @param title new title
+     * @param date new date
+     * @param mpaa new mpaa
+     * @param director new director
+     * @param studio new studio
+     * @param userRating new userRating
+     */
     public static void editDVD(DVD dvd, String title, String date, String mpaa, String director, String studio, String userRating) {
 
         if (!title.equals("")) {
@@ -100,6 +135,10 @@ public class Controller {
         save();
     }
 
+    /**
+     * Loads dvds from a path defined in a global static variable int a list of dvd objects.
+     * @throws FileNotFoundException
+     */
     public static void loadDvds() throws FileNotFoundException {
         System.out.println("Loading from " + FILE);
         File txt = new File(FILE);
@@ -133,6 +172,9 @@ public class Controller {
 
     }
 
+    /**
+     *  Saves the list of dvds to the globally defined static file path.
+     */
     public static void save() {
         System.out.println("Saving...");
         try {
@@ -152,6 +194,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Checks if there is already a film with param title in list of films
+     * @param title of film in question
+     * @return true if film exists already, false if not.
+     */
     public static boolean dupCheck(String title) {
 
         for (DVD dvd : dvds) {
@@ -163,10 +210,17 @@ public class Controller {
         return false;
     }
 
+    /**
+     * Manually change save and load location.
+     * @param path new save/load location.
+     */
     public static void setFile(String path) {
         FILE = path;
     }
 
+    /**
+     * Exits the program with exit code 0
+     */
     public static void exit() {
         System.exit(0);
     }

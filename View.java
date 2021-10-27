@@ -10,6 +10,9 @@ public class View {
     //static String FILE_PATH = "src/DVDsaves/dvd.csv";
     static String FILE_PATH = "src/DVDLibrary/dvds.txt";
 
+    /**
+     * Main menu interface and default location from which user can make decisions.
+     */
     public static void menu() {
 
         System.out.println("=============================================");
@@ -50,6 +53,9 @@ public class View {
         }
     }
 
+    /**
+     * Takes user input to send to the addDvd function in Controller
+     */
     public static void addFilm() {
 
         Scanner in = new Scanner(System.in);
@@ -69,12 +75,20 @@ public class View {
         displayFilm(search(title));
     }
 
+    /**
+     * Calls removeDvd from Controller and then takes user back to menu
+     * @param dvd to remove
+     */
     public static void remFilm(DVD dvd) {
 
         removeDvd(dvd);
         menu();
     }
 
+    /**
+     * Takes in new values for a dvd that user enters then takes user to the display page for dvd.
+     * @param dvd to be edited
+     */
     public static void editFilm(DVD dvd) {
 
         Scanner in  = new Scanner(System.in);
@@ -100,6 +114,9 @@ public class View {
         displayFilm(dvd);
     }
 
+    /**
+     * calls list method in Controller then takes user back to menu
+     */
     public static void listFilm() {
 
         System.out.println("Here are all film titles...");
@@ -107,6 +124,9 @@ public class View {
         menu();
     }
 
+    /**
+     * Asks for input to search list for film, then calls the search function and takes user to display page for dvd.
+     */
     public static void searchFilm() {
 
         System.out.println("Enter the film's title");
@@ -126,6 +146,10 @@ public class View {
         menu();
     }
 
+    /**
+     * Provides user with options involving the param dvd.
+     * @param dvd displayed and dvd which options can be executed on.
+     */
     public static void displayFilm(DVD dvd) {
         System.out.println("=============================================");
         display(dvd);
@@ -153,6 +177,9 @@ public class View {
 
     }
 
+    /**
+     * Calls load method in Controller then takes user back to menu
+     */
     public static void loadFile() {
         try {
             loadDvds();
@@ -162,11 +189,18 @@ public class View {
         menu();
     }
 
+    /**
+     * Calls save method in Controller then takes user back to menu
+     */
     public static void saveFile() {
         save();
         menu();
     }
 
+    /**
+     * Takes user input to call setFile in Controller. This changes the path which the app saves/loads.
+     * Then takes user back to menu.
+     */
     public static void saveLocation() {
         System.out.println("Enter new file location");
         Scanner in = new Scanner(System.in);
@@ -177,6 +211,9 @@ public class View {
 
     }
 
+    /**
+     * Calls exit function in Controller
+     */
     public static void exiting() {
         System.out.println("Goodbye!");
         exit();
